@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Detection App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/dropzone.js" defer></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-primary mb-4">
+        <div class="container-fluid text-light py-2">
+            <h3>Color Detection & Palette Generator</h3>
+        </div>
+    </nav>
+
+    <div class="container">
+        <form class="mt-5" action="/" method="post" enctype="multipart/form-data" id="uploadForm">
+            <div class="mb-3">
+                <label for="file" class="form-label fs-2 fw-semibold">Upload an Image</label>
+                <div id="dropZone" class="border-2 border-dashed border-primary-subtle rounded p-5 text-center bg-light"
+                    style="cursor: pointer; transition: all 0.3s ease;">
+                    <svg class="mb-3" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                        <path
+                            d="M8 5a.5.5 0 0 1 .5.5v3.362l1.146-1.147a.5.5 0 0 1 .707.707l-2.5 2.5a.5.5 0 0 1-.707 0l-2.5-2.5a.5.5 0 1 1 .707-.707L7.5 9.362V5.5A.5.5 0 0 1 8 5z" />
+                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2z" />
+                    </svg>
+                    <p class="mb-2"><strong>Drag & drop your image here</strong></p>
+                    <p class="text-muted mb-3">or</p>
+                    <input id="file" name="file" type="file" accept="image/*,android/allowCamera" required class="d-none">
+                    <div class="d-flex justify-content-center gap-2">
+                        <button type="button" class="btn btn-primary"
+                            onclick="document.getElementById('file').click()">Choose
+                            File</button>
+                    </div>
+                    <p id="fileName" class="mt-3 text-success d-none"></p>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success" id="submitBtn">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>
