@@ -4,6 +4,9 @@ const fileName = document.getElementById('fileName');
 const submitBtn = document.getElementById('submitBtn');
 const imagePreview = document.getElementById('image-preview');
 const imageHolder = document.getElementById('image-holder');
+const numOfColorSelection = document.getElementById('numOfColorSelection');
+const results = document.getElementById('results');
+const fileError = document.getElementById('file-error')
 
 const allowedFileTypes = ["image/png", "image/jpeg", "image/gif"];
 
@@ -31,6 +34,8 @@ dropZone.addEventListener('drop', (e) => {
 });
 
 fileInput.addEventListener('change', (e) => {
+    fileError.innerText = "";
+    results.innerHTML = '';
     files = fileInput.files;
     isValid = validateUpload(files);
 
@@ -44,25 +49,28 @@ fileInput.addEventListener('change', (e) => {
 
     updateFileName(files[0].name);
     updateImage(files[0]);
+
+    numOfColorSelection?.classList.remove('d-none');
+    imageHolder?.classList.remove('d-none');
 });
 
 function validateUpload(files) {
     isValid = true;
 
     if (files.length > 1) {
-        console.log("Only 1 image can be uploaded at a time")
+        fileError.innerText = "❌ Only 1 image can be uploaded at a time";
         isValid = false;
     }
 
     file = files[0];
 
     if (!allowedFileTypes.includes(file.type)) {
-        console.log("Please upload image file")
+        fileError.innerText = "❌ Please upload image file";
         isValid = false;
     }
 
     if (file.size > allowedFileSizeInBytes) {
-        console.log("file size cant be more than " + allowedFileSizeInMB + "MB")
+        fileError.innerText = "❌ file size cant be more than " + allowedFileSizeInMB + "MB";
         isValid = false;
     }
 
@@ -81,8 +89,6 @@ function updateImage(file) {
     reader.onload = function (e) {
         imagePreview.classList.remove('d-none');
         imagePreview.src = e.target?.result;
-
-        imageHolder?.classList.remove('d-none');
     };
 
     reader.readAsDataURL(file);
