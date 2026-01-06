@@ -3,11 +3,11 @@ from fastapi import FastAPI, Form, Request, UploadFile
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from image_processing import get_dominant_colors  # Assume this module exists for image processing
+from app.image_processing import get_dominant_colors  # Assume this module exists for image processing
 
 app = FastAPI(title="Color Detection App")
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory=["templates", "partials"])
+app.mount("/app/static/", StaticFiles(directory="app/static"), name="static")
+templates = Jinja2Templates(directory=["app/templates", "app/partials"])
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
